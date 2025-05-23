@@ -32,7 +32,6 @@ const authenticateUser = (email, password) => {
 
 const registerUser = (name, last_name, email, password, phone, address, birth_date) => {
   return new Promise((resolve, reject) => {
-    // Comprobamos si ya existe ese email
     db.query('SELECT * FROM customers WHERE email = ?', [email], (err, results) => {
       if (err) return reject(err);
       if (results.length > 0) return reject(new Error('El correo ya está registrado'));
