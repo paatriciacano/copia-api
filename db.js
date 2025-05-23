@@ -1,13 +1,12 @@
-// db.js
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'serenia_latte',
-  charset: 'utf8mb4' 
-  
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+
+  charset: 'utf8mb4'
 });
 
 db.connect((err) => {

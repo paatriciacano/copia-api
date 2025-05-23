@@ -3,35 +3,44 @@ const jwt = require('jsonwebtoken');
 const db = require('../db');  
 
 
-const authenticateUser = (email, password) => {
-  return new Promise((resolve, reject) => {
+const authenticateUser = async (email, password)=> {
+try {
+const [results] = await db.query('SELECT * FROM employees WHERE email = ?', [email]);
 
-    db.query('SELECT * FROM customers WHERE email = ?', [email], (err, results) => {
-      if (err) return reject(err);
-      if (results.length === 0) {
-        return reject(new Error('Usuario no encontrado'));
-      }
+    if (results.length === 0) {
+      throw new Error('Empleado no encontrado');
+    }
 
-      const user = results[0]; // Solo hay un usuario con este email
+    const employee = results[0];
 
-      // Comparar contraseñas usando bcrypt.compare
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) return reject(err);
-        if (!isMatch) {
-          return reject(new Error('Contraseña incorrecta'));
-        }
-
-        // Si la contraseña es correcta, generamos el JWT
-        const token = jwt.sign({ userId: user.id, email: user.email }, 'sl-pcm2003', { expiresIn: '24h' });
-        resolve({ token, userId: user.id });
+    const isMatch = await new Promise((resolve, reject) => {
+      bcrypt.compare(password, employee.password, (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
       });
     });
-  });
+
+    if (!isMatch) {
+      throw new Error('Contraseña incorrecta');
+    }
+
+    const token = jwt.sign(
+      { userId: employee.id, email: employee.email, role_id: employee.role_id },
+      'sl-pcm2003',
+      { expiresIn: '24h' }
+    );
+
+    return { token, userId: employee.id, role_id: employee.role_id };
+
+  } catch (error) {
+    throw error;
+  }
 };
 
 
 const registerUser = (name, last_name, email, password, phone, address, birth_date) => {
   return new Promise((resolve, reject) => {
+    // Comprobamos si ya existe ese email
     db.query('SELECT * FROM customers WHERE email = ?', [email], (err, results) => {
       if (err) return reject(err);
       if (results.length > 0) return reject(new Error('El correo ya está registrado'));

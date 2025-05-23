@@ -14,15 +14,7 @@ app.use('/images', express.static(path.join(__dirname, 'images'), {
   maxAge: '30d'
 }));
 
-db.connect((err) => {
-  if (err) {
-    console.error('Error en la conexión a la base de datos:', err);
-    process.exit(1);
-  }
-  console.log('Conexión a la base de datos establecida');
-});
-
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 1000;
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });

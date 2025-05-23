@@ -4,7 +4,10 @@ const jwt = require('jsonwebtoken');
 const db = require('../db');
 
 const authenticateEmployee = (email, password) => {
+  console.log('authenticateEmployee -> email:', email);
+
   return new Promise((resolve, reject) => {
+
     db.query('SELECT * FROM employees WHERE email = ?', [email], (err, results) => {
       if (err) return reject(err);
       if (results.length === 0) return reject(new Error('Empleado no encontrado'));
@@ -24,6 +27,7 @@ const authenticateEmployee = (email, password) => {
     });
   });
 };
+
 
 const register = (name, email, password, phone, role_id) => {
   return new Promise((resolve, reject) => {

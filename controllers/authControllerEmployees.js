@@ -4,6 +4,7 @@ const { register,authenticateEmployee } = require('../services/authServiceEmploy
 
 const loginEmployee = async (req, res) => {
   const { email, password } = req.body;
+  console.log('loginEmployee -> email:', email, 'password:', password );
 
   try {
     const data = await authenticateEmployee(email, password);
