@@ -20,5 +20,5 @@ app.use('/images', express.static(path.join(__dirname, 'images'), {
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`Servidor corriendo el el puerto ${port}`);
 });
