@@ -1,7 +1,7 @@
 // server.js
 const express = require('express');
 const cors = require('cors');  
-const path = require('path'); // Asegúrate de importar path
+const path = require('path'); 
 
 const app = express();
 const db = require('./db');  
@@ -9,7 +9,7 @@ const routes = require('./routes');
 
 app.use(express.json());  
 app.use(cors({
-  origin: 'https://www.pattydev.com', // tu frontend en producción
+  origin: 'https://www.pattydev.com', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
