@@ -18,7 +18,7 @@ app.use('/images', express.static(path.join(__dirname, 'images'), {
   maxAge: '30d'
 }));
 
-const port = process.env.PORT || 1000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
