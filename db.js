@@ -14,5 +14,7 @@ const config = {
 console.log('Configuración de conexión a MySQL:', config);
 
 const pool = mysql.createPool(config);
-
+pool.on('connection', (connection) => {
+  connection.query("SET NAMES utf8mb4");
+});
 module.exports = pool;
