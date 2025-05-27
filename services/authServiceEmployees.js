@@ -1,13 +1,11 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { query, pool } = require('../db'); // 👈 
+const { query } = require('../db');  // Solo importamos query
 
 const authenticateEmployee = async (email, password) => {
   console.log('authenticateEmployee -> email:', email, 'password:', password);
-console.log('typeof pool.query:', typeof pool.query);
 
   try {
-
     const rows = await query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
 
@@ -36,6 +34,8 @@ console.log('typeof pool.query:', typeof pool.query);
     throw err;
   }
 };
+
+module.exports = { authenticateEmployee };
 
 const register = (name, email, password, phone, role_id) => {
   return new Promise((resolve, reject) => {
