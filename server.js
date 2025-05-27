@@ -13,7 +13,11 @@ app.use(cors({
   origin: 'https://www.pattydev.com', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}));
+}))
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json; charset=latin1');
+  next();
+});
 app.use('/api', routes);  
 app.use('/images', express.static(path.join(__dirname, 'images'), {
   maxAge: '30d'
