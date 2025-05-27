@@ -5,6 +5,7 @@ const config = {
   user: 'ddb254183',
   password: '03111965.pcM',
   database: 'ddb254183',
+    charset: 'utf8mb4_general_ci'
 
 };
 
