@@ -7,7 +7,7 @@ const authenticateEmployee = async (email, password) => {
 
   try {
     console.log(typeof email, email);
-//await pool.query("SET NAMES 'latin1'");
+await pool.query("SET NAMES 'latin1'");
 
     const [rows] = await pool.query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
