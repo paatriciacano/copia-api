@@ -14,8 +14,8 @@ const config = {
 console.log('Configuración de conexión a MySQL:', config);
 
 const pool = mysql.createPool(config);
-pool.on('connection', (connection) => {
-  connection.query("SET NAMES latin1"); 
+pool.on('connection', async (connection) => {
+  await connection.query("SET NAMES 'latin1'");
 });
 
 module.exports = pool;
