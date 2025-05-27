@@ -3,6 +3,7 @@ const { register,authenticateEmployee } = require('../services/authServiceEmploy
 
 
 const loginEmployee = async (req, res) => {
+    console.log('Body recibido:', req.body); // para verificar que el body llegue bien
   const { email, password } = req.body;
   console.log('loginEmployee -> email:', email, 'password:', password );
 
