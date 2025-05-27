@@ -1,19 +1,28 @@
 // authServiceEmployees.js
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const db = require('../db');
+const createConnection = require('../db');
 
 const authenticateEmployee = (email, password) => {
   console.log('authenticateEmployee -> email:', email);
 
   return new Promise((resolve, reject) => {
+    const db = createConnection();
 
     db.query('SELECT * FROM employees WHERE email = ?', [email], (err, results) => {
-      if (err) return reject(err);
-      if (results.length === 0) return reject(new Error('Empleado no encontrado'));
+        if (err) {
+          db.end();
+          return reject(err);
+        }
+
+        if (results.length === 0) {
+          db.end();
+          return reject(new Error('Empleado no encontrado'));
+        }
 
       const employee = results[0];
       bcrypt.compare(password, employee.password, (err, isMatch) => {
+        db.end();
         if (err) return reject(err);
         if (!isMatch) return reject(new Error('Contraseña incorrecta'));
 
