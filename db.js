@@ -5,7 +5,7 @@ console.log({
   DB_USER: process.env.DB_USER,
   DB_PASS: process.env.DB_PASS,
   DB_NAME: process.env.DB_NAME,
-  charset: config.DB_CHARSET || 'utf8mb4', 
+  charset: config.DB_CHARSET, 
 });
 
 const pool = mysql.createPool({
@@ -13,9 +13,10 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-charset: process.env.DB_CHARSET,
-
-  connectionLimit: 10
+  charset: config.DB_CHARSET || 'utf8mb4', 
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 module.exports = pool;
