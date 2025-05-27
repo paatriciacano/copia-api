@@ -6,6 +6,7 @@ const authenticateEmployee = async (email, password) => {
   console.log('authenticateEmployee -> email:', email);
 
   const [rows] = await pool.query('SELECT * FROM employees WHERE email = ?', [email]);
+  console.log('Resultado consulta DB:', rows);
 
   if (rows.length === 0) {
     throw new Error('Empleado no encontrado');
@@ -13,6 +14,8 @@ const authenticateEmployee = async (email, password) => {
 
   const employee = rows[0];
   const isMatch = await bcrypt.compare(password, employee.password);
+    console.log('¿Contraseña coincide?', isMatch);
+
   if (!isMatch) {
     throw new Error('Contraseña incorrecta');
   }
