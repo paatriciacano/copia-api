@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db'); // ahora es un pool con promesas
 
 const authenticateEmployee = async (email, password) => {
-  console.log('authenticateEmployee -> email:', email);
+  console.log('authenticateEmployee -> email:', email,  'password:' , password);
 
   try {
     const [rows] = await pool.query('SELECT * FROM employees WHERE email = ?', [email]);
