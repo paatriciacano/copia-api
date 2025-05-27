@@ -1,20 +1,14 @@
+// db.js
 const mysql = require('mysql2');
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  charset: 'utf8mb4'
-});
+const createConnection = () => {
+  return mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    charset: 'utf8mb4'
+  });
+};
 
-db.connect((err) => {
-  if (err) {
-    console.error('Error de conexión a MySQL:', err.message);
-    process.exit(1);
-  } else {
-    console.log('Conexión a MySQL establecida');
-  }
-});
-
-module.exports = db;
+module.exports = createConnection;
