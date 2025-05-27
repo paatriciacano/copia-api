@@ -17,6 +17,6 @@ charset: process.env.DB_CHARSET,
 
   connectionLimit: 10
 });
-console.log('Pool charset:', pool.config.connectionConfig.charset);
+console.log('Pool object:', pool);
 
 module.exports = pool;
