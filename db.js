@@ -7,7 +7,6 @@ console.log({
   DB_NAME: process.env.DB_NAME,
   DB_CHARSET: process.env.DB_CHARSET,
 });
-console.log('Pool charset:', pool.config.connectionConfig.charset);
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -18,5 +17,6 @@ charset: process.env.DB_CHARSET,
 
   connectionLimit: 10
 });
+console.log('Pool charset:', pool.config.connectionConfig.charset);
 
 module.exports = pool;
