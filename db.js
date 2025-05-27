@@ -1,19 +1,27 @@
-const mysql = require('mysql2'); // sin promesas
+const mysql = require('mysql2/promise'); // usa mysql2 con promesas
 
-const connection = mysql.createConnection({
+const config = {
   host: 'bbdd.pattydev.com',
   user: 'ddb254183',
   password: '03111965.pcM',
   database: 'ddb254183',
-  charset: 'utf8mb4'
-});
+  charset: 'utf8mb4',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+};
 
-connection.connect(err => {
-  if (err) {
-    console.error('Error al conectar a la base de datos:', err);
-  } else {
-    console.log('Conectado a la base de datos MySQL.');
-  }
-});
+console.log('Configuración de conexión a MySQL:', config);
 
-module.exports = connection;
+const pool = mysql.createPool(config);
+
+
+async function query(sql, params) {
+  const [rows] = await pool.query(sql, params); // directamente pool.query
+  return rows;
+}
+
+module.exports = {
+  pool,
+  query
+};
