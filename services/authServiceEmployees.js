@@ -1,14 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../db'); // ahora es un pool con promesas
+const { query } = require('../db'); // 👈 
 
 const authenticateEmployee = async (email, password) => {
   console.log('authenticateEmployee -> email:', email, 'password:', password);
 
   try {
-    console.log(typeof email, email);
+    if (!email || !password) throw new Error('Faltan email o contraseña');
+console.log('typeof pool.query:', typeof pool.query);
 
-    const [rows] = await pool.query('SELECT * FROM employees WHERE email = ?', [email]);
+    const rows = await query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
 
     if (rows.length === 0) {
@@ -36,7 +37,6 @@ const authenticateEmployee = async (email, password) => {
     throw err;
   }
 };
-
 
 const register = (name, email, password, phone, role_id) => {
   return new Promise((resolve, reject) => {

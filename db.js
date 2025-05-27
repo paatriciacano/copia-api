@@ -5,7 +5,7 @@ const config = {
   user: 'ddb254183',
   password: '03111965.pcM',
   database: 'ddb254183',
-  charset: 'utf8mb4', // 👍 charset moderno, compatible con tildes y emojis
+  charset: 'utf8mb4',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
