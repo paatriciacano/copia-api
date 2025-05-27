@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { query } = require('../db');  // Solo importamos query
+const { query } = require('../db'); 
 
 const authenticateEmployee = async (email, password) => {
   console.log('authenticateEmployee -> email:', email, 'password:', password);
