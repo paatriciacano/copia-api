@@ -7,7 +7,6 @@ const authenticateEmployee = async (email, password) => {
 console.log('typeof pool.query:', typeof pool.query);
 
   try {
-    if (!email || !password) throw new Error('Faltan email o contraseña');
 
     const rows = await query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
