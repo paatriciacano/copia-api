@@ -4,10 +4,10 @@ const { query } = require('../db'); // 👈
 
 const authenticateEmployee = async (email, password) => {
   console.log('authenticateEmployee -> email:', email, 'password:', password);
+console.log('typeof pool.query:', typeof pool.query);
 
   try {
     if (!email || !password) throw new Error('Faltan email o contraseña');
-console.log('typeof pool.query:', typeof pool.query);
 
     const rows = await query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
