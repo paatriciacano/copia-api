@@ -5,7 +5,7 @@ console.log({
   DB_USER: process.env.DB_USER,
   DB_PASS: process.env.DB_PASS,
   DB_NAME: process.env.DB_NAME,
-  DB_CHARSET: process.env.DB_CHARSET,
+  charset: config.DB_CHARSET || 'utf8mb4', 
 });
 
 const pool = mysql.createPool({
