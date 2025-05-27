@@ -5,7 +5,7 @@ const config = {
   user: 'ddb254183',
   password: '03111965.pcM',
   database: 'ddb254183',
-  charset: 'utf8mb4',
+  charset: 'latin1',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -15,6 +15,7 @@ console.log('Configuración de conexión a MySQL:', config);
 
 const pool = mysql.createPool(config);
 pool.on('connection', (connection) => {
-  connection.query("SET NAMES utf8mb4");
+  connection.query("SET NAMES latin1"); 
 });
+
 module.exports = pool;
