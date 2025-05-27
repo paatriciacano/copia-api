@@ -16,6 +16,8 @@ console.log('Configuración de conexión a MySQL:', config);
 const pool = mysql.createPool(config);
 pool.on('connection', async (connection) => {
   await connection.query("SET NAMES 'latin1'");
+  const [rows] = await connection.query("SHOW VARIABLES LIKE 'character_set_client'");
+  console.log('Charset connection:', rows);
 });
 
 module.exports = pool;
