@@ -3,11 +3,10 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db'); // ahora es un pool con promesas
 
 const authenticateEmployee = async (email, password) => {
-  console.log('authenticateEmployee -> email:', email,  'password:' , password);
+  console.log('authenticateEmployee -> email:', email, 'password:', password);
 
   try {
     console.log(typeof email, email);
-await pool.query("SET NAMES 'latin1'");
 
     const [rows] = await pool.query('SELECT * FROM employees WHERE email = ?', [email]);
     console.log('Resultado consulta DB:', rows);
