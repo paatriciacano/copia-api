@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 
 const getAllProducts = () => {
   return new Promise((resolve, reject) => {
-    const connection = mysql.createConnection(dbConfig);
+    const connection = mysql.createConnection(db);
     connection.connect(err => {
       if (err) {
         connection.end();
