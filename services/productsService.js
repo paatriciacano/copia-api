@@ -5,18 +5,9 @@ const mysql = require('mysql2');
 
 const getAllProducts = () => {
   return new Promise((resolve, reject) => {
-    const connection = mysql.createConnection(db);
-    connection.connect(err => {
-      if (err) {
-        connection.end();
-        return reject(err);
-      }
-
-      connection.query('SELECT * FROM products', (err, results) => {
-        connection.end(); // cerrar conexión después de la consulta
-        if (err) return reject(err);
-        resolve(results);
-      });
+    db.query("SELECT * FROM products", (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
     });
   });
 };
