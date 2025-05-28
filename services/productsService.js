@@ -1,5 +1,4 @@
 const db = require("../db");
-const mysql = require('mysql2');
 
 // Obtener todos los productos
 
