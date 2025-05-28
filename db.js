@@ -13,7 +13,6 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Verificar si se puede conectar
 pool.getConnection((err, connection) => {
   if (err) {
     console.error('Error de conexión inicial:', err.message);
