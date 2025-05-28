@@ -1,12 +1,22 @@
 const db = require("../db");
+const mysql = require('mysql2');
 
 // Obtener todos los productos
 
 const getAllProducts = () => {
   return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM products", (err, results) => {
-      if (err) return reject(err);
-      resolve(results);
+    const connection = mysql.createConnection(dbConfig);
+    connection.connect(err => {
+      if (err) {
+        connection.end();
+        return reject(err);
+      }
+
+      connection.query('SELECT * FROM products', (err, results) => {
+        connection.end(); // cerrar conexión después de la consulta
+        if (err) return reject(err);
+        resolve(results);
+      });
     });
   });
 };
