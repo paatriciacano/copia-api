@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+/*const mysql = require('mysql2');
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -24,3 +24,24 @@ pool.getConnection((err, connection) => {
 
 const promisePool = pool.promise();
 module.exports = promisePool;
+*/
+
+var mysql = require('mysql')
+
+var { database } = require('./keys')
+
+var { promisify } = require('util')
+
+var conexion = mysql.createPool(database);
+
+
+conexion.getConnection((error, connection) => {
+	if (error)
+		console.log('Problemas de conexion con mysql', error.code)
+	if(connection) connection.release()
+	console.log("Conectado a la BD")
+})
+
+conexion.query = promisify(conexion.query)
+
+module.exports = conexion
