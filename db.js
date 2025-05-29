@@ -26,7 +26,7 @@ const promisePool = pool.promise();
 module.exports = promisePool;
 */
 
-var mysql = require('mysql2')
+var mysql = require('mysql')
 
 var { database } = require('./keys')
 
