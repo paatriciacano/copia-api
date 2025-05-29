@@ -2,9 +2,14 @@ const db = require("../db");
 
 // Obtener todos los productos
 
-const getAllProducts = async () => {
-  const [results] = await db.query("SELECT * FROM products");
-  return results;
+
+const getAllProducts = () => {
+  return new Promise((resolve, reject) => {
+    db.query("SELECT * FROM products", (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    });
+  });
 };
 
 //Obtener todos los tamaños
@@ -16,6 +21,8 @@ const getAllSizes = () => {
     });
   });
 };
+
+
 // Obtener un producto por ID
 const getProductById = (id) => {
   return new Promise((resolve, reject) => {
