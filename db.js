@@ -26,13 +26,13 @@ const promisePool = pool.promise();
 module.exports = promisePool;
 */
 
-var mysql = require('mysql')
+const mysql = require('mysql')
 
-var { database } = require('./keys')
+const { database } = require('./keys')
 
-var { promisify } = require('util')
+const { promisify } = require('util')
 
-var conexion = mysql.createPool(database);
+const conexion = mysql.createPool(database);
 
 
 conexion.getConnection((error, connection) => {
@@ -43,5 +43,16 @@ conexion.getConnection((error, connection) => {
 })
 
 conexion.query = promisify(conexion.query)
+
+/*const mysql = require('mysql2');
+const dotenv = require("dotenv");
+dotenv.config();
+
+const conexion = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME    
+})*/
 
 module.exports = conexion
